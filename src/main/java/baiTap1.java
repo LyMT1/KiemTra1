@@ -27,39 +27,28 @@ public class baiTap1 {
         return s;
     }
 
-
-    void stringToSTring(String s) {
-        String message = s;
-        char[] charArray = message.toCharArray();
-        //sử dụng vòng lặp for để duyệt các phần tử trong charArray
-        for(int i = 0; i < charArray.length; i++) {
-            if(charArray[i] >= 97 && charArray[i] <= 122){
-                charArray[i] -= 32;
+    public String chuanHoaChuoi(String input) {
+        int pos = 0;
+        boolean capitalize = false;
+        StringBuilder sb = new StringBuilder(input);
+        while (pos < sb.length()) {
+            if (!Character.isWhitespace(sb.charAt(pos)) && capitalize) {
+                sb.setCharAt(pos, Character.toUpperCase(sb.charAt(pos)));
+                capitalize = false;
+            } else {
+                sb.setCharAt(pos, Character.toLowerCase(sb.charAt(pos)));
             }
+            if (pos == 0)
+                sb.setCharAt(pos, Character.toUpperCase(sb.charAt(pos)));
+            if (sb.charAt(pos) == '.') {
+                capitalize = true;
+            }
+            pos++;
         }
-        // chuyển đổi mảng char thành string
-        message = String.valueOf(charArray);
-        System.out.println("3. Chuỗi sau khi đổi: \n" + message);
+        System.out.println("\n3. Chuyển ký tự đầu tiên của chuỗi hoặc ký tự đầu tiên của từ sau dấu chấm là viết in hoa, các chữ con lại viết thường: ");
 
-    }
-
-    public String chuanHoa(String str) {
-        str = str.trim();
-        str = str.replaceAll("\\s+", " ");
-        return str;
-    }
-
-    public void chuanHoaChuoi(String str) {
-        String firstLetter = str.substring(0, 1);
-        // chuỗi remainingLetters chứa phần còn lại của name
-        String remainingLetters = str.substring(1, str.length());
-
-        //sử dụng phương thức toUpperCase() để chuyển đổi firstLetter thành chữ in hoa
-        firstLetter = firstLetter.toUpperCase();
-
-        //sau khi chuyển đổi thì gộp chúng lại
-        str = firstLetter + remainingLetters;
-        System.out.println("3. Chuỗi sau khi đổi: " + str);
+        System.out.println(sb.toString());
+        return sb.toString();
     }
 
 }
